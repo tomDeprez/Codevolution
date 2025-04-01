@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codevolution - Contrainte Aléatoire</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #2a2a4a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            width: 500px;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        button {
+            background: #ff6f61;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #ff6f61;
+        }
+
+        #result {
+            margin-top: 30px;
+            color: #fff;
+            font-size: 1.1em;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        #result.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .title {
+            font-weight: bold;
+            font-size: 1.4em;
+            color: #ffeb3b;
+        }
+
+        .description {
+            margin-top: 10px;
+            font-style: italic;
+            color: #e0e0e0;
+        }
+
+        /* Animation de "roulette" */
+        @keyframes spin {
+            0% { transform: translateY(-100px); opacity: 0; }
+            50% { transform: translateY(10px); opacity: 0.5; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Codevolution : Tire une Contrainte !</h1>
+        <button onclick="drawConstraint()">Lancer la Roulette</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const constraints = [
+            {
+                title: "Héritage forcé",
+                desc: "Ta nouvelle classe doit hériter d’une classe existante. Exemple : un `Dragon` hérite de `Enemy`. Tu dois utiliser l’héritage pour créer ou modifier une classe en te basant sur ce qui existe déjà."
+            },
+            {
+                title: "Polymorphisme surprise",
+                desc: "Réécris une méthode existante dans une sous-classe pour qu’elle fasse quelque chose de différent. Exemple : `move()` devient un vol au lieu d’une marche. Montre que tu peux personnaliser un comportement !"
+            },
+            {
+                title: "Attribut rigolo",
+                desc: "Ajoute une propriété inutile mais drôle à une classe. Exemple : `smellLevel` pour un monstre ou `danceSkill` pour le joueur. Fais rire les autres avec ton idée loufoque."
+            },
+            {
+                title: "Bug amical",
+                desc: "Introduis volontairement un bug mineur (ex. : texte qui clignote, déplacement inversé) que les autres devront gérer plus tard. Rends-le subtil mais visible pour pimenter le jeu !"
+            },
+            {
+                title: "Double classe",
+                desc: "Crée deux classes liées qui interagissent. Exemple : `Weapon` et `Shield`. Assure-toi qu’elles fonctionnent ensemble dans le code pour ajouter de la profondeur."
+            },
+            {
+                title: "Méthode absurde",
+                desc: "Ajoute une méthode qui ne sert à rien dans le gameplay mais qui amuse. Exemple : `singASong()` affiche des paroles débiles. Laisse parler ton humour !"
+            },
+            {
+                title: "Limite de lignes",
+                desc: "Ton ajout ne doit pas dépasser 10 lignes de code (commentaires exclus). Force-toi à être concis et créatif dans cet espace réduit."
+            },
+            {
+                title: "Thème imposé",
+                desc: "Ton ajout doit suivre un thème tiré au sort (ex. : feu, eau, espace, nourriture). Adapte ta classe ou méthode à ce thème pour une touche narrative fun."
+            }
+        ];
+
+        function drawConstraint() {
+            const resultDiv = document.getElementById("result");
+            resultDiv.classList.remove("show"); // Réinitialise l’animation
+
+            // Effet de "roulette" avec un délai
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * constraints.length);
+                const constraint = constraints[randomIndex];
+                resultDiv.innerHTML = `
+                    <div class="title">${constraint.title}</div>
+                    <div class="description">${constraint.desc}</div>
+                `;
+                resultDiv.classList.add("show"); // Déclenche l’animation
+            }, 300); // Petit délai pour l’effet
+        }
+    </script>
+</body>
+</html>
